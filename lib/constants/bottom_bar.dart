@@ -7,14 +7,8 @@ import 'package:jeje_mall5/jt_cart_icons.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:jeje_mall5/constants/colors.dart';
 import 'package:jeje_mall5/screens/order_history.dart';
-import 'package:jeje_mall5/screens/profile_screen.dart';
 import 'package:jeje_mall5/constants/cart_provider.dart';
 import 'package:jeje_mall5/screens/checkout_screen2.dart';
-
-
-
-
-
 
 
 class BottomNav extends StatefulWidget {
@@ -85,7 +79,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     int cartItemCount = getTotalCartQuantity();
-    final cartProvider = Provider.of<CartProvider>(context);
+    Provider.of<CartProvider>(context);
 
     return Scaffold(
       body: Center(

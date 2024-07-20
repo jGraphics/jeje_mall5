@@ -15,12 +15,12 @@ class OnboardingScreen extends StatelessWidget {
     OnboardingModel(
       title: 'Discover Products',
       description: 'Find the best products curated just for you!',
-      lottieAnimation: 'https://lottie.host/563e9f01-68a5-41e9-8091-a179c4c0c58e/mC8KBtjihw.json',
+      lottieAnimation: 'https://lottie.host/b907bf8c-4500-42d8-ae05-274391f1b8ff/X4EB0jbMT4.json',
     ),
     OnboardingModel(
       title: 'Fast and Secure',
       description: 'Enjoy fast and secure transactions.',
-      lottieAnimation: 'assets/animations/animation3.json',
+      lottieAnimation: 'https://lottie.host/3bdd3a8b-50ff-494a-a7e7-e7641bbfdc21/frCrBVvOnl.json',
     ),
   ];
 
@@ -44,7 +44,7 @@ class OnboardingScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.network(page.lottieAnimation),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 18),
                       Text(
                         page.title,
                         style: const TextStyle(

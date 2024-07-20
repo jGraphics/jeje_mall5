@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart'; 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -334,16 +335,24 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ],
               )
-            : const Column(
+            : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 305),
+                  const SizedBox(height: 150),
                   Center(
-                    child: Text(
-                      'No Items in Cart',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
+                    child: Lottie.network(
+                      'https://lottie.host/945b8558-0f5c-4792-a793-d5f13dc11611/hCCFhsPEoC.json',
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const Text(
+                    'No Items in Cart',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 24,
                     ),
                   ),
                 ],

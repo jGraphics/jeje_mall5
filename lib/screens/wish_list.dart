@@ -1,14 +1,13 @@
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jeje_mall5/constants/colors.dart';
-import 'package:jeje_mall5/screens/cart_screen.dart';
 import 'package:jeje_mall5/constants/cart_provider.dart';
 import 'package:jeje_mall5/constants/wish_list_provider.dart';
 import 'package:jeje_mall5/apis/models/listOfProductItem.dart';
-
 
 class WishlistScreen extends StatelessWidget {
   final List<Item> wishlistItems;
@@ -18,7 +17,7 @@ class WishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wishlistProvider = Provider.of<WishlistProvider>(context);
-     final wishlistItems = wishlistProvider.wishlistItems;
+    final wishlistItems = wishlistProvider.wishlistItems;
     final NumberFormat currencyFormat =
         NumberFormat.currency(symbol: '₦', decimalDigits: 2);
 
@@ -35,52 +34,68 @@ class WishlistScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-       backgroundColor: colorBgW,
+        backgroundColor: colorBgW,
         iconTheme: const IconThemeData(color: blFa),
       ),
       backgroundColor: colorBgW,
-     body: wishlistItems.isEmpty
-          ? const Center(child: Text('Your wishlist is empty'))
+      body: wishlistItems.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.network(
+                    'https://lottie.host/945b8558-0f5c-4792-a793-d5f13dc11611/hCCFhsPEoC.json',
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Your wishlist is empty',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 22,
+                    ),
+                  ),
+                ],
+              ),
+            )
           : ListView.builder(
               itemCount: wishlistItems.length,
               itemBuilder: (context, index) {
                 final item = wishlistItems[index];
                 return ListTile(
-            title: Text(item.name ?? ''),
-            subtitle:
-                Text(currencyFormat.format(item.currentPrice?[0].ngn[0] ?? 0)),
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                "https://api.timbu.cloud/images/${item.photos[0].url}",
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
-            trailing: IconButton(
-              icon: const Icon(IconsaxPlusLinear.message_minus),
-              onPressed: () {
-                wishlistProvider.removeFromWishlist(item);
-                // Implement removal from wishlist functionality here
-                // Example: Provider.of<WishlistProvider>(context, listen: false).removeFromWishlist(item);
+                  title: Text(item.name ?? ''),
+                  subtitle: Text(currencyFormat.format(item.currentPrice?[0].ngn[0] ?? 0)),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      "https://api.timbu.cloud/images/${item.photos[0].url}",
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(IconsaxPlusLinear.message_minus),
+                    onPressed: () {
+                      wishlistProvider.removeFromWishlist(item);
+                    },
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDetailsScreen(item: item),
+                      ),
+                    );
+                  },
+                );
               },
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductDetailsScreen(item: item),
-                ),
-              );
-            },
-          );
-        },
-      ),
     );
   }
 }
-
 class ProductDetailsScreen extends StatelessWidget {
   final Item item;
 
@@ -175,7 +190,23 @@ class ProductDetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text('Add to Cart'),
+child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Add To Cart  ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.white),
+                            ),
+                            Icon(
+                              IconsaxPlusBold.shopping_cart,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ],
+                        ),
                     ),
                   ),
                 ],
