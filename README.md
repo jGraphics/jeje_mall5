@@ -1,9 +1,10 @@
 <h1 align="center" id="title">Jejelove Malltiverse Timbu App with Payment & Checkout</h1>
 
-<p align="center"><img src="
+<p align="center"><img src="<video autoplay>
+  <source src="(https://github.com/user-attachments/assets/08c0a0fd-5f59-4fbb-b1a1-c1df7da050b3)" type="video/mp4">
+</video>
 
-https://github.com/user-attachments/assets/08c0a0fd-5f59-4fbb-b1a1-c1df7da050b3
-" alt="project-image"></p>
+</p>
 
 <p id="description">A shopping app getting data from Timbu Api this time lists them by categories. Users can add products to the cart and delete products from the cart, which is also reflected on the bottom tab bar. Thanks to the integration of Paystack in the app, users can make payments, add products to wishlists, etc.
 Part of HNG Internship - for Stage 5 </p>
