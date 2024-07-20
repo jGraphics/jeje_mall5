@@ -1,157 +1,123 @@
-import '../constants/colors.dart';
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../model/onboarding_model.dart';
-import '../apis/models/OnBoardingController.dart';
+import '../apis/models/onboarding_controller.dart';
+import 'package:jeje_mall5/constants/bottom_bar.dart';
 
-class OnboardingScreenUtil extends StatelessWidget {
-  final OnboardingModel onboardingModel;
-  final OnboardingController controller;
-
-  const OnboardingScreenUtil({
-    super.key,
-    required this.onboardingModel,
-    required this.controller,
-  });
+class OnboardingScreen extends StatelessWidget {
+  final List<OnboardingModel> onboardingPages = [
+    OnboardingModel(
+      title: 'Welcome to Jejelove',
+      description: 'Experience seamless shopping like never before!',
+      lottieAnimation: 'https://lottie.host/563e9f01-68a5-41e9-8091-a179c4c0c58e/mC8KBtjihw.json',
+    ),
+    OnboardingModel(
+      title: 'Discover Products',
+      description: 'Find the best products curated just for you!',
+      lottieAnimation: 'https://lottie.host/563e9f01-68a5-41e9-8091-a179c4c0c58e/mC8KBtjihw.json',
+    ),
+    OnboardingModel(
+      title: 'Fast and Secure',
+      description: 'Enjoy fast and secure transactions.',
+      lottieAnimation: 'assets/animations/animation3.json',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: const AssetImage('./assets/images/hnc.png'),
-                fit: onboardingModel.imgStretch ? BoxFit.fill : BoxFit.contain,
-              ),
-            ),
-          ),
-          Container(
-            height: 400,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0x007d77ee),
-                  kPrimaryColor,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.2, 0.4],
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+      body: Consumer<OnboardingController>(
+        builder: (context, controller, child) {
+          return Stack(
             children: [
-              Text(
-                onboardingModel.onBoardMsgHeading,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  wordSpacing: 3,
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Text(
-                onboardingModel.onBoardMsgBody,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(
-                height: 40.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  controller.navigateToWelcome(context);
+              PageView.builder(
+                controller: controller.pageController,
+                onPageChanged: (index) {
+                  controller.currentPage = index;
+                  controller.notifyListeners();
                 },
-                child: Text(
-                  onboardingModel.nextMsg,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                itemCount: onboardingPages.length,
+                itemBuilder: (context, index) {
+                  final page = onboardingPages[index];
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Lottie.network(page.lottieAnimation),
+                      const SizedBox(height: 24),
+                      Text(
+                        page.title,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        page.description,
+                        style: const TextStyle(fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  );
+                },
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                ),
+              Positioned(
+                bottom: 30,
+                left: 20,
+                right: 20,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Row(
-                        children: List.generate(5, (index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 3),
-                            child: Container(
-                              height: 5.0,
-                              width: 22.0,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
-                                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                              ),
-                            ),
-                          );
-                        }),
+                    TextButton(
+                      onPressed: () {
+                        controller.skipToEnd();
+                      },
+                      child: const Text('Skip'),
+                    ),
+                    Row(
+                      children: List.generate(
+                        onboardingPages.length,
+                        (index) => AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
+                          width: controller.currentPage == index ? 12 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: controller.currentPage == index
+                                ? Colors.blue
+                                : Colors.grey,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
                       ),
                     ),
                     TextButton(
                       onPressed: () {
-                        if (onboardingModel.buttonText == 'Next') {
-                          controller.nextPage();
+                        if (controller.currentPage == onboardingPages.length - 1) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BottomNav(),
+                            ),
+                          );
                         } else {
-                          controller.navigateToWelcome(context);
+                          controller.nextPage();
                         }
                       },
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.white,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10.0,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              onboardingModel.buttonText,
-                              style: const TextStyle(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              color: kPrimaryColor,
-                            ),
-                          ],
-                        ),
+                      child: Text(
+                        controller.currentPage == onboardingPages.length - 1
+                            ? 'Start'
+                            : 'Next',
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 40.0,
-              ),
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

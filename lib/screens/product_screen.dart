@@ -174,7 +174,7 @@ class _ProductScreenState extends State<ProductScreen> {
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 5),
                   Container(
                     width: 380,
                     height: 232,

@@ -1,13 +1,18 @@
 import '../screens/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../screens/product_screen.dart';
 import '../apis/models/listOfProductItem.dart';
 import 'package:jeje_mall5/jt_cart_icons.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:jeje_mall5/constants/colors.dart';
-import 'package:jeje_mall5/screens/wish_list.dart';
+import 'package:jeje_mall5/screens/order_history.dart';
 import 'package:jeje_mall5/screens/profile_screen.dart';
+import 'package:jeje_mall5/constants/cart_provider.dart';
 import 'package:jeje_mall5/screens/checkout_screen2.dart';
+
+
+
 
 
 
@@ -71,15 +76,16 @@ class _BottomNavState extends State<BottomNav> {
         removeFromCart: removeFromCart,
         updateCart: updateCart,
       ),
-      CheckoutStage2(),
+      const CheckoutStage2(),
 
-      const ProfileScreen(), // Add WishlistScreen to the options
+      const OrderHistoryScreen(), // Add WishlistScreen to the options
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     int cartItemCount = getTotalCartQuantity();
+    final cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
       body: Center(
@@ -194,12 +200,12 @@ GestureDetector(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            IconsaxPlusLinear.user_tag,
+                            IconsaxPlusLinear.receipt_search,
                             color: _selectedIndex == 3 ? colorPrimary : colorBgW,
                           ),
                           if (_selectedIndex == 3)
                             Text(
-                              'Profile',
+                              'O-History',
                               style: TextStyle(
                                 color: _selectedIndex == 3 ? colorPrimary : colorBgW,
                               ),

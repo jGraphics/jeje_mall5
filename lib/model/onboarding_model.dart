@@ -1,17 +1,11 @@
 class OnboardingModel {
-  final String backgroundImg;
-  final String onBoardMsgHeading;
-  final String onBoardMsgBody;
-  final String nextMsg;
-  final String buttonText;
-  final bool imgStretch;
+  final String title;
+  final String description;
+  final String lottieAnimation;
 
   OnboardingModel({
-    required this.backgroundImg,
-    required this.onBoardMsgHeading,
-    required this.onBoardMsgBody,
-    this.nextMsg = 'Skip',
-    this.buttonText = 'Next',
-    this.imgStretch = false,
+    required this.title,
+    required this.description,
+    required this.lottieAnimation, 
   });
 }

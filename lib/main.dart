@@ -10,15 +10,12 @@ import 'screens/payment_success.dart';
 import 'screens/checkout_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'apis/models/OnBoardingController.dart';
+import 'apis/models/onboarding_controller.dart';
 import 'package:jeje_mall5/screens/wish_list.dart';
 import 'package:jeje_mall5/constants/bottom_bar.dart';
 import 'package:jeje_mall5/screens/order_history.dart';
+import 'package:jeje_mall5/constants/cart_provider.dart';
 import 'package:jeje_mall5/constants/wish_list_provider.dart';
-
-
-
-
 
 void main() {
   runApp(const MyApp());
@@ -34,13 +31,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => TimbuApiProvider(),
         ),
-         ChangeNotifierProvider(
-          create: (_) => WishlistProvider(),
-          ),
         ChangeNotifierProvider(
-          create: (_) => OnboardingController(
-            pageController: PageController(),
-          ),
+          create: (_) => WishlistProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => OnboardingController(),
         ),
       ],
       child: MaterialApp(
@@ -52,9 +50,9 @@ class MyApp extends StatelessWidget {
           }),
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: 'bnav',
+        initialRoute: 'onboarding',
         routes: {
-                   'onboarding': (context) => const OnboardingScreen(),
+          'onboarding': (context) => OnboardingScreen(),
           'bnav': (context) => const BottomNav(),
           'checkout': (context) => const CheckoutSuccessPage(),
           'cart': (context) => CartPage(
@@ -65,35 +63,16 @@ class MyApp extends StatelessWidget {
           'profile': (context) => const ProfileScreen(),
           'product': (context) => ProductScreen(
                 cart: const [],
-                addToCart: (product) {}, category: '',
+                addToCart: (product) {},
+                category: '',
               ),
           'products-detail': (context) => const ViewProductPage(),
           'order-history': (context) => const OrderHistoryScreen(),
-          'wish-list': (context) => const WishlistScreen(wishlistItems: [],),
-          'checkout_stage_2': (context) => CheckoutStage2(), // Add route for checkout stage 2
-          'payment': (context) => PaymentScreen(), // Add route for payment screen
+          'wish-list': (context) => const WishlistScreen(wishlistItems: []),
+          'checkout_stage_2': (context) => const CheckoutStage2(), // Add route for checkout stage 2
+          'payment': (context) => const PaymentScreen(), // Add route for payment screen
         },
       ),
-    );
-  }
-}
-
-class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final onboardingController = Provider.of<OnboardingController>(context);
-
-    final onboardingModel = OnboardingModel(
-      backgroundImg: 'assets/images/hnc.png',
-      onBoardMsgHeading: 'Jejelove Malltiverse Timbu Shop',
-      onBoardMsgBody: 'Shop products from timbu api - HNG Stage4',
-    );
-
-    return OnboardingScreenUtil(
-      onboardingModel: onboardingModel,
-      controller: onboardingController,
     );
   }
 }

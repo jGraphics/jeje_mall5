@@ -5,6 +5,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jeje_mall5/constants/colors.dart';
 import 'package:jeje_mall5/screens/cart_screen.dart';
+import 'package:jeje_mall5/constants/cart_provider.dart';
 import 'package:jeje_mall5/constants/wish_list_provider.dart';
 import 'package:jeje_mall5/apis/models/listOfProductItem.dart';
 
@@ -89,6 +90,7 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final NumberFormat currencyFormat =
         NumberFormat.currency(symbol: '₦', decimalDigits: 2);
+        final cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -155,11 +157,26 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add to cart functionality
-                    },
-                    child: const Text('Add to Cart'), 
+                  SizedBox(
+                    width: 307,
+                    height: 44,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        cartProvider.addToCart(item);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Item added to cart'),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorPrimary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text('Add to Cart'),
+                    ),
                   ),
                 ],
               ),

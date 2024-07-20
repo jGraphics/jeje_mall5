@@ -31,7 +31,7 @@ class _CartPageState extends State<CartPage> {
   void checkout() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CheckoutStage2()),
+      MaterialPageRoute(builder: (context) => const CheckoutStage2()),
     );
     setState(() {
       widget.cart.clear();
@@ -308,7 +308,7 @@ class _CartPageState extends State<CartPage> {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                CheckoutStage2(),
+                                                const CheckoutStage2(),
                                           ),
                                         );
                                       },

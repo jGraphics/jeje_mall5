@@ -23,6 +23,7 @@ dependencies:
   iconsax_plus: ^1.0.0
   http: ^1.2.2
   pay_with_paystack: ^1.0.10
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
