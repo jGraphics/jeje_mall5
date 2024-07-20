@@ -1,9 +1,9 @@
-<h1 align="center" id="title">Jejelove Malltiverse Timbu App</h1>
+<h1 align="center" id="title">Jejelove Malltiverse Timbu App with Payment & Checkout</h1>
 
 <p align="center"><img src="peggyroxy.me" alt="project-image"></p>
 
-<p id="description">A shopping app getting data from Timbu Api this time lists them by categories. Users can add products to the cart and also delete products from the cart which is reflected on the bottom tab bar also. Users can make payments, thanks to integration of paystack in the app, add products to wishlists etc.
-Part of HNG Internship </p>
+<p id="description">A shopping app getting data from Timbu Api this time lists them by categories. Users can add products to the cart and delete products from the cart, which is also reflected on the bottom tab bar. Thanks to the integration of Paystack in the app, users can make payments, add products to wishlists, etc.
+Part of HNG Internship - for Stage 5 </p>
 
 ![Mobile App - My cart](https://github.com/user-attachments/assets/dba61c7e-572d-42fe-a441-964693a5ac81)
 ![Mobile App - Product List 3](https://github.com/user-attachments/assets/35a6e7b2-8bcf-4d8b-ab75-fe9b291eb6ec)
