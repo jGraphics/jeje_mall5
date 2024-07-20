@@ -141,7 +141,7 @@ class _CartPageState extends State<CartPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '₦${currencyFormat.format(product.currentPrice?[0].ngn[0] ?? 0.0)}',
+                                  currencyFormat.format(product.currentPrice?[0].ngn[0] ?? 0.0),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -246,7 +246,7 @@ class _CartPageState extends State<CartPage> {
                                           ),
                                         ),
                                         child: const Text(
-                                          'Apply',
+                                          'Enter',
                                           style: TextStyle(
                                               color: blFa, fontSize: 12),
                                         ),
