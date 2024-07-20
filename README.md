@@ -1,17 +1,14 @@
 <h1 align="center" id="title">Jejelove Malltiverse Timbu App with Payment & Checkout</h1>
 
-<p align="center"><img src="<video autoplay>
-  <source src="(https://github.com/user-attachments/assets/08c0a0fd-5f59-4fbb-b1a1-c1df7da050b3)" type="video/mp4">
-</video>
-
-</p>
 
 <p id="description">A shopping app getting data from Timbu Api this time lists them by categories. Users can add products to the cart and delete products from the cart, which is also reflected on the bottom tab bar. Thanks to the integration of Paystack in the app, users can make payments, add products to wishlists, etc.
 Part of HNG Internship - for Stage 5 </p>
 
-![Mobile App - My cart](https://github.com/user-attachments/assets/dba61c7e-572d-42fe-a441-964693a5ac81)
-![Mobile App - Product List 3](https://github.com/user-attachments/assets/35a6e7b2-8bcf-4d8b-ab75-fe9b291eb6ec)
-![Mobile App - Payment](https://github.com/user-attachments/assets/22598232-8b82-45ab-9c29-fcd97adceb6d)
+<p align="center">
+
+https://github.com/user-attachments/assets/a42d818a-1f47-4f27-be1a-0504bd3356db
+
+</p>
 
 
 <h2>🚀 Demo</h2>
@@ -53,11 +50,12 @@ git clone https://github.com/jGraphics/jeje_mall5.git
 flutter pub get
 ```
 
-<p>5. On your timbu account store add your products along with products details price etc</p>
+<p>5. On your Timbu account store add your products along with product details, price etc</p>
 
-<p>6. Replace to API KEY` APP ID and ORGANIZATION ID with your stores information in the folder.</p>
+<p>6. Replace API KEY` APP ID and ORGANIZATION ID with your stores information in the folder.</p>
 
-<p> 7. Sign up with paystack and create a developer account.</>
+<p> 7. Sign up with Paystack and create a developer account.</>
+  
 <p> 8. Get your test sk_test keys to test the payment endpoints </>
 
 <p>9 Modify other screens as desired</p>
@@ -70,4 +68,5 @@ Technologies used in the project:
 
 *   Flutter
 *   Timbu API
+*   Lottie Files
 *   Pay with paystack dependency
