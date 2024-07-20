@@ -1,12 +1,14 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:jeje_mall5/apis/timbu_api.dart';
 import 'package:jeje_mall5/constants/colors.dart';
 import 'package:jeje_mall5/screens/wish_list.dart';
 import 'package:jeje_mall5/screens/view_product.dart';
+import 'package:jeje_mall5/apis/connectionUrl/apiUrl.dart';
 import 'package:jeje_mall5/apis/models/mainListProduct.dart';
 import 'package:jeje_mall5/constants/wish_list_provider.dart';
 import 'package:jeje_mall5/apis/models/listOfProductItem.dart';
@@ -28,30 +30,56 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final List<Item> _wishlistItems = [];
-  late Future<MainProduct> futureProducts;
+  late Future<void> futureProducts;
   final Map<String, List<Item>> _categoryProducts = {};
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
+  
 
   @override
   void initState() {
     super.initState();
-    futureProducts = Provider.of<TimbuApiProvider>(context, listen: false)
-        .getProductByCategory(widget.category);
-    getAllProductByCategory();
-  }
+  futureProducts = getAllProductByCategory();  }
 
-  void getAllProductByCategory() async {
+Future<void> getAllProductByCategory() async {
     final get = Provider.of<TimbuApiProvider>(context, listen: false);
-    var categories = ["Tech-Gadget", "Men's-Fashion", "Women's-Fashion"];
 
-    for (var category in categories) {
-      var products = await get.getProductByCategory(category);
+    try {
+      // Fetch products for each category
+      var techProducts = await get.fetchProductsByCategoryId(Timbu().techId);
+      var menProducts = await get.fetchProductsByCategoryId(Timbu().menId);
+      var womenProducts = await get.fetchProductsByCategoryId(Timbu().womenId);
+
+      // Update state with fetched products
       setState(() {
-        _categoryProducts[category] = products.items;
+        _categoryProducts['Tech-Gadget'] = techProducts;
+        _categoryProducts['Men\'s-Fashion'] = menProducts;
+        _categoryProducts['Women\'s-Fashion'] = womenProducts;
       });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Failed to fetch products: $e');
+      }
+      //ui error msg here
     }
   }
+
+
+// void getAllProductByCategory() async {
+//   final timbu = Timbu(); // Assuming you have an instance of Timbu class
+//   final categories = {
+//     'Tech-Gadget': timbu.techId,
+//     "Men's-Fashion": timbu.menId,
+//     "Women's-Fashion": timbu.womenId,
+//   };
+
+//   for (var category in categories.keys) {
+//     var products = await timbu.fetchProductsByCategoryId(categories[category]!);
+//     setState(() {
+//       _categoryProducts[category] = products;
+//     });
+//   }
+// } 
 
   void addToWishlist(Item product) {
     final wishlistProvider =
@@ -174,7 +202,7 @@ class _ProductScreenState extends State<ProductScreen> {
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               child: Column(
                 children: [
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 20),
                   Container(
                     width: 380,
                     height: 232,
@@ -230,8 +258,10 @@ class _ProductScreenState extends State<ProductScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: _categoryProducts.keys.map((category) {
-                      List<Item> products = _categoryProducts[category]!;
-                      return Column(
+                      List<Item> products = _categoryProducts[category] ?? [];
+                      return products.isEmpty
+                      ? Center( child: Text('No PRODUCT AVAILABLE FOR $category'),)
+                      : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(

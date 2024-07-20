@@ -4,7 +4,6 @@ import 'screens/view_product.dart';
 import 'screens/profile_screen.dart';
 import 'screens/product_screen.dart';
 import 'screens/payment_screen.dart';
-import 'model/onboarding_model.dart';
 import 'screens/onboarding_page.dart';
 import 'screens/payment_success.dart';
 import 'screens/checkout_screen2.dart';

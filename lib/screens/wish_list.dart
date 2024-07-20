@@ -66,7 +66,8 @@ class WishlistScreen extends StatelessWidget {
                 final item = wishlistItems[index];
                 return ListTile(
                   title: Text(item.name ?? ''),
-                  subtitle: Text(currencyFormat.format(item.currentPrice?[0].ngn[0] ?? 0)),
+                  subtitle: Text(
+                      currencyFormat.format(item.currentPrice?[0].ngn[0] ?? 0)),
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
@@ -76,11 +77,28 @@ class WishlistScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  trailing: IconButton(
-                    icon: const Icon(IconsaxPlusLinear.message_minus),
-                    onPressed: () {
-                      wishlistProvider.removeFromWishlist(item);
-                    },
+                          trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.add_shopping_cart),
+                        onPressed: () {
+                          Provider.of<CartProvider>(context, listen: false)
+                              .addToCart(item);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Item added to cart'),
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(IconsaxPlusLinear.message_minus),
+                        onPressed: () {
+                          wishlistProvider.removeFromWishlist(item);
+                        },
+                      ),
+                    ],
                   ),
                   onTap: () {
                     Navigator.push(
@@ -105,7 +123,7 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final NumberFormat currencyFormat =
         NumberFormat.currency(symbol: '₦', decimalDigits: 2);
-        final cartProvider = Provider.of<CartProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -125,7 +143,7 @@ class ProductDetailsScreen extends StatelessWidget {
       backgroundColor: colorBgW,
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: 240, // Adjust as per your design
@@ -137,7 +155,7 @@ class ProductDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     item.name ?? '',
@@ -155,6 +173,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Row(
+                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image(image: AssetImage('assets/images/fill_star.png')),
                       Image(image: AssetImage('assets/images/fill_star.png')),
@@ -190,23 +209,23 @@ class ProductDetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Add To Cart  ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.white),
-                            ),
-                            Icon(
-                              IconsaxPlusBold.shopping_cart,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ],
-                        ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Add To Cart  ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: blFa),
+                          ),
+                          Icon(
+                            IconsaxPlusLinear.shopping_cart,
+                            color: blFa,
+                            size: 24,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
