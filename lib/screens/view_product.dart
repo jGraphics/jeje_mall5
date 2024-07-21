@@ -25,7 +25,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
   Item? item;
   bool isLoading = true;
   List<Item> cart = [];
-
+late Future<Item> futureProduct;
   @override
   void initState() {
     super.initState();
@@ -95,22 +95,29 @@ class _ViewProductPageState extends State<ViewProductPage> {
         ),
         centerTitle: true,
       ),
-      
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 240, // Adjust as per your design
-              child: Image.network(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: 350,
+                      child: item?.photos != null && item!.photos.isNotEmpty
+                          ? Image.network(
                 "https://api.timbu.cloud/images/${item?.photos[0].url}",
-                fit: BoxFit.cover,
-              ),
-            ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Center(
+                                child: Text('Image not available'),
+                              ),
+                            )
+                          : const Center(
+                              child: Text('No Image Available'),
+                            ),
+                    ),
                     const SizedBox(height: 20),
                     Text(
                       item?.name?.toUpperCase() ?? 'No Name',

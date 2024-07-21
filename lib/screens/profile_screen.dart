@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const OrderHistoryScreen()),
+                  MaterialPageRoute(builder: (context) =>  OrderHistoryPage(orderHistory: const [],)),
                 );
                 // Handle navigation to order history screen
               },

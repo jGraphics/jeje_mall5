@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
                 category: '',
               ),
           'products-detail': (context) => const ViewProductPage(),
-          'order-history': (context) => const OrderHistoryScreen(),
+          'order-history': (context) => OrderHistoryPage(orderHistory: const [],),
           'wish-list': (context) => const WishlistScreen(wishlistItems: []),
           'checkout_stage_2': (context) => const CheckoutStage2(), // Add route for checkout stage 2
           'payment': (context) => const PaymentScreen(), // Add route for payment screen

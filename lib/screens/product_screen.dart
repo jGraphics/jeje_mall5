@@ -7,9 +7,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:jeje_mall5/apis/timbu_api.dart';
 import 'package:jeje_mall5/constants/colors.dart';
 import 'package:jeje_mall5/screens/wish_list.dart';
-import 'package:jeje_mall5/screens/view_product.dart';
 import 'package:jeje_mall5/apis/connectionUrl/apiUrl.dart';
-import 'package:jeje_mall5/apis/models/mainListProduct.dart';
 import 'package:jeje_mall5/constants/wish_list_provider.dart';
 import 'package:jeje_mall5/apis/models/listOfProductItem.dart';
 
@@ -300,20 +298,20 @@ Future<void> getAllProductByCategory() async {
                                         padding: const EdgeInsets.all(16.0),
                                         child: GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewProductPage(
-                                                  id: product.id,
-                                                  itemPrice: currencyFormat
-                                                      .format(product
-                                                              .currentPrice?[0]
-                                                              .ngn[0] ??
-                                                          0),
-                                                ),
-                                              ),
-                                            );
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) =>
+                                            //         ViewProductPage(
+                                            //       id: product.id,
+                                            //       itemPrice: currencyFormat
+                                            //           .format(product
+                                            //                   .currentPrice?[0]
+                                            //                   .ngn[0] ??
+                                            //               0),
+                                            //     ),
+                                            //   ),
+                                            // );
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(

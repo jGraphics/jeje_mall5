@@ -2,6 +2,7 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/onboarding_model.dart';
+import 'package:jeje_mall5/constants/colors.dart';
 import '../apis/models/onboarding_controller.dart';
 import 'package:jeje_mall5/constants/bottom_bar.dart';
 
@@ -23,6 +24,8 @@ class OnboardingScreen extends StatelessWidget {
       lottieAnimation: 'https://lottie.host/3bdd3a8b-50ff-494a-a7e7-e7641bbfdc21/frCrBVvOnl.json',
     ),
   ];
+
+  OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +83,13 @@ class OnboardingScreen extends StatelessWidget {
                       children: List.generate(
                         onboardingPages.length,
                         (index) => AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 100),
                           margin: const EdgeInsets.symmetric(horizontal: 3),
                           width: controller.currentPage == index ? 12 : 8,
                           height: 8,
                           decoration: BoxDecoration(
                             color: controller.currentPage == index
-                                ? Colors.blue
+                                ? colorPrimary
                                 : Colors.grey,
                             borderRadius: BorderRadius.circular(4),
                           ),

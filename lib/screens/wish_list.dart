@@ -6,6 +6,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jeje_mall5/constants/colors.dart';
 import 'package:jeje_mall5/constants/cart_provider.dart';
+import 'package:jeje_mall5/screens/checkout_screen2.dart';
 import 'package:jeje_mall5/constants/wish_list_provider.dart';
 import 'package:jeje_mall5/apis/models/listOfProductItem.dart';
 
@@ -14,10 +15,32 @@ class WishlistScreen extends StatelessWidget {
 
   const WishlistScreen({super.key, required this.wishlistItems});
 
+  void checkout(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CheckoutStage2()),
+    );
+    Provider.of<CartProvider>(context, listen: false).clearCart();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Cart cleared.'),
+      ),
+    );
+  }
+
+  void incrementQuantity(Item product, BuildContext context) {
+    Provider.of<CartProvider>(context, listen: false).incrementItemQuantity(product);
+  }
+
+  void decrementQuantity(Item product, BuildContext context) {
+    Provider.of<CartProvider>(context, listen: false).decrementItemQuantity(product);
+  }
+
   @override
   Widget build(BuildContext context) {
     final wishlistProvider = Provider.of<WishlistProvider>(context);
     final wishlistItems = wishlistProvider.wishlistItems;
+    final cartProvider = Provider.of<CartProvider>(context);
     final NumberFormat currencyFormat =
         NumberFormat.currency(symbol: '₦', decimalDigits: 2);
 
@@ -77,23 +100,12 @@ class WishlistScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                          trailing: Row(
+                  trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.add_shopping_cart),
-                        onPressed: () {
-                          Provider.of<CartProvider>(context, listen: false)
-                              .addToCart(item);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Item added to cart'),
-                            ),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(IconsaxPlusLinear.message_minus),
+                        icon: const Icon(IconsaxPlusLinear.trash, 
+                        color: Colors.red,),
                         onPressed: () {
                           wishlistProvider.removeFromWishlist(item);
                         },
@@ -114,6 +126,7 @@ class WishlistScreen extends StatelessWidget {
     );
   }
 }
+
 class ProductDetailsScreen extends StatelessWidget {
   final Item item;
 
@@ -173,7 +186,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Row(
-                     crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image(image: AssetImage('assets/images/fill_star.png')),
                       Image(image: AssetImage('assets/images/fill_star.png')),

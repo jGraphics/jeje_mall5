@@ -72,7 +72,7 @@ class _BottomNavState extends State<BottomNav> {
       ),
       const CheckoutStage2(),
 
-      const OrderHistoryScreen(), // Add WishlistScreen to the options
+      OrderHistoryPage(orderHistory: const [],), // Add WishlistScreen to the options
     ];
   }
 

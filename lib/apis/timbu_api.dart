@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:jeje_mall5/apis/connectionUrl/apiUrl.dart';
 import 'package:jeje_mall5/apis/models/listOfProductItem.dart';
 
-
 class TimbuApiProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get loading => _isLoading;
@@ -53,7 +52,7 @@ class TimbuApiProvider with ChangeNotifier {
 
     setLoading(false);
     if (res.statusCode == 200) {
-      return singleItemFromJson(res.body);
+      return Item.fromJson(json.decode(res.body));
     } else {
       throw Exception('Failed to load product');
     }
@@ -63,7 +62,7 @@ class TimbuApiProvider with ChangeNotifier {
     setLoading(true);
     final String url =
         '${Timbu().productUrl}?organization_id=${Timbu().organizationId}&Appid=${Timbu().appId}&Apikey=${Timbu().apiKey}&reverse_sort=false&category=$category';
-    
+
     if (kDebugMode) {
       print(url);
     }
