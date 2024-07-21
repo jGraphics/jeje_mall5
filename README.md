@@ -6,7 +6,11 @@ Part of HNG Internship - for Stage 5 </p>
 
 <p align="center">
 
-https://github.com/user-attachments/assets/a42d818a-1f47-4f27-be1a-0504bd3356db
+
+
+https://github.com/user-attachments/assets/bac57264-8825-48f4-87a5-3826209b62cf
+
+
 
 </p>
 
@@ -29,7 +33,11 @@ Here are some of the project's best features:
 *   Delivery option
 *   Pickup option
 *   Payment with Paystack
+*   Wishlist
+*   Wishlist item counter
+*   Empty States for cart, wishlist and order history 
 *   Splashscreen
+*   Onboarding Screens
 *   Circular progression
 
   <h2>🛠️ Installation Steps:</h2>
